@@ -69,7 +69,7 @@
                     <div class="space-y-6">
                         <div class="flex items-center">
                             <Badge
-                                variant="secondary"
+                                variant="default"
                                 class="flex gap-2 px-3 py-1 font-medium transition-colors hover:bg-muted"
                             >
                                 <span>Nuevos productos</span>

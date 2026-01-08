@@ -16,7 +16,7 @@
             <div class="flex items-center gap-6">
                 <a
                     href="/"
-                    class="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+                    class="text-xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent"
                 >
                     Anware Store
                 </a>
