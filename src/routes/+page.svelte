@@ -51,10 +51,10 @@
 
 <Navbar />
 
-<main class="flex min-h-screen flex-col bg-[#09090b]">
+<main class="flex min-h-screen flex-col bg-background">
     <section class="relative overflow-hidden py-24 md:py-32">
         <div
-            class="absolute inset-0 bg-linear-to-b from-[#19191b] to-[#09090b] pointer-events-none"
+            class="absolute inset-0 bg-linear-to-b from-muted to-background pointer-events-none"
         ></div>
 
         <div
@@ -145,13 +145,15 @@
         ></div>
     </section>
 
-    <section class="bg-[#09090b] py-20">
+    <section class="bg-background py-20">
         <div class="container mx-auto max-w-7xl px-4">
             <div class="mb-12 text-center">
-                <h2 class="mb-2 text-3xl font-bold text-white md:text-4xl">
+                <h2 class="mb-2 text-3xl font-bold text-foreground md:text-4xl">
                     Productos Destacados
                 </h2>
-                <div class="mx-auto mb-4 h-1 w-12 rounded-full bg-white"></div>
+                <div
+                    class="mx-auto mb-4 h-1 w-12 rounded-full bg-foreground"
+                ></div>
                 <p class="text-muted-foreground">
                     Nuestros productos mas populares y recomendados
                 </p>
@@ -160,7 +162,7 @@
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                 {#each featuredProducts as product}
                     <Card.Root
-                        class="group overflow-hidden border border-border/50 bg-[#09090b] p-0 gap-0 transition-all hover:border-primary/50"
+                        class="group overflow-hidden border border-border/50 bg-card p-0 gap-0 transition-all hover:border-primary/50"
                     >
                         <div
                             class="relative aspect-square overflow-hidden bg-muted"
@@ -189,13 +191,14 @@
 
                         <Card.Content class="flex flex-col gap-4 p-5">
                             <h3
-                                class="text-xl font-bold text-white leading-tight min-h-12 line-clamp-2"
+                                class="text-xl font-bold text-foreground leading-tight min-h-12 line-clamp-2"
                             >
                                 {product.name}
                             </h3>
 
                             <div class="flex items-baseline gap-2">
-                                <span class="text-2xl font-medium text-white"
+                                <span
+                                    class="text-2xl font-medium text-foreground"
                                     >S/ {product.price}</span
                                 >
                             </div>
@@ -203,7 +206,7 @@
 
                         <Card.Footer class="px-5 pb-4 pt-0">
                             <Button.Root
-                                class="w-full gap-2 bg-white text-black hover:bg-white/90 transition-all active:scale-95"
+                                class="w-full gap-2 transition-all active:scale-95"
                                 variant="default"
                             >
                                 <ShoppingCart class="h-5 w-5" />
@@ -215,10 +218,7 @@
             </div>
 
             <div class="mt-12 text-center">
-                <Button.Root
-                    variant="outline"
-                    class="group bg-[#1c1c1c] border-none text-white hover:bg-[#2a2a2a]"
-                >
+                <Button.Root variant="outline" class="group">
                     Ver todos los productos
                     <ArrowRight
                         class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
