@@ -7,6 +7,7 @@
     import Headphones from "@lucide/svelte/icons/headphones";
     import ProductCard from "$lib/components/catalog/product-card.svelte";
     import WhyChooseUs from "$lib/components/catalog/why-choose-us.svelte";
+    import Footer from "$lib/components/layout/footer.svelte";
 
     let { data } = $props();
     let featuredProducts = $derived(data.products);
@@ -147,3 +148,5 @@
 
     <WhyChooseUs />
 </main>
+
+<Footer />
