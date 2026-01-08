@@ -70,7 +70,7 @@
                         <div class="flex items-center">
                             <Badge
                                 variant="default"
-                                class="flex gap-2 px-3 py-1 font-medium transition-colors hover:bg-muted"
+                                class="flex gap-2 px-3 py-1 font-medium transition-colors"
                             >
                                 <span>Nuevos productos</span>
                             </Badge>
