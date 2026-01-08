@@ -1,5 +1,105 @@
-<h1>Welcome to SvelteKit</h1>
-<p>
-    Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
-    documentation
-</p>
+<script lang="ts">
+    import Navbar from "$lib/components/layout/navbar.svelte";
+    import * as Button from "$lib/components/ui/button/index.js";
+    import { Badge } from "$lib/components/ui/badge/index.js";
+    import ArrowRight from "@lucide/svelte/icons/arrow-right";
+    import Lock from "@lucide/svelte/icons/lock";
+    import Headphones from "@lucide/svelte/icons/headphones";
+</script>
+
+<Navbar />
+
+<main class="flex min-h-screen flex-col bg-[#09090b]">
+    <section class="relative overflow-hidden py-24 md:py-32">
+        <div
+            class="absolute inset-0 bg-linear-to-b from-[#19191b] to-[#09090b] pointer-events-none"
+        ></div>
+
+        <div
+            class="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/10 blur-[100px] opacity-40"
+        ></div>
+
+        <div
+            class="relative z-10 container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+        >
+            <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+                <div class="flex flex-col justify-center space-y-8">
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <Badge
+                                variant="secondary"
+                                class="flex gap-2 px-3 py-1 font-medium transition-colors hover:bg-muted"
+                            >
+                                <span>Nuevos productos</span>
+                            </Badge>
+                        </div>
+
+                        <h1
+                            class="font-display text-4xl leading-tight font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:leading-[1.1]"
+                        >
+                            La tienda en donde encuentras{" "}
+                            <span
+                                class="bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+                            >
+                                lo que necesitas
+                            </span>
+                        </h1>
+
+                        <p
+                            class="max-w-700px text-lg text-muted-foreground md:text-xl"
+                        >
+                            Descubre una amplia variedad de productos de alta
+                            calidad a precios competitivos. ¡Compra ahora!
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <Button.Root
+                            class="group transition-all hover:scale-105 active:scale-95"
+                        >
+                            Ver Catalogo
+                            <ArrowRight
+                                class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                            />
+                        </Button.Root>
+                        <Button.Root variant="outline">WhatsApp</Button.Root>
+                    </div>
+
+                    <div
+                        class="flex flex-wrap gap-5 text-sm text-muted-foreground"
+                    >
+                        <div
+                            class="flex items-center gap-2 transition-colors hover:text-foreground"
+                        >
+                            <Lock class="h-4 w-4" />
+                            <span>Seguro y confiable</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-2 transition-colors hover:text-foreground"
+                        >
+                            <Headphones class="h-4 w-4" />
+                            <span>24/7 Soporte al cliente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="relative mx-auto hidden aspect-square w-full max-w-md overflow-hidden rounded-2xl border bg-muted shadow-2xl lg:block"
+                >
+                    <div
+                        class="absolute inset-0 z-10 bg-linear-to-tr from-primary/10 via-transparent to-transparent"
+                    ></div>
+                    <img
+                        alt="Shopping experience"
+                        class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                        src="https://images.unsplash.com/photo-1624767735494-1929dc24ad43?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
+        ></div>
+    </section>
+</main>
