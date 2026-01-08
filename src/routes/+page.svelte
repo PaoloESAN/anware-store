@@ -6,6 +6,7 @@
     import Lock from "@lucide/svelte/icons/lock";
     import Headphones from "@lucide/svelte/icons/headphones";
     import ProductCard from "$lib/components/catalog/product-card.svelte";
+    import WhyChooseUs from "$lib/components/catalog/why-choose-us.svelte";
 
     let { data } = $props();
     let featuredProducts = $derived(data.products);
@@ -143,4 +144,6 @@
             </div>
         </div>
     </section>
+
+    <WhyChooseUs />
 </main>
