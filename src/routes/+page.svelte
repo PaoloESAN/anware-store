@@ -2,51 +2,13 @@
     import Navbar from "$lib/components/layout/navbar.svelte";
     import * as Button from "$lib/components/ui/button/index.js";
     import { Badge } from "$lib/components/ui/badge/index.js";
-    import * as Card from "$lib/components/ui/card/index.js";
     import ArrowRight from "@lucide/svelte/icons/arrow-right";
     import Lock from "@lucide/svelte/icons/lock";
     import Headphones from "@lucide/svelte/icons/headphones";
-    import ShoppingCart from "@lucide/svelte/icons/shopping-cart";
-    //import Heart from "@lucide/svelte/icons/heart";
+    import ProductCard from "$lib/components/catalog/product-card.svelte";
 
-    const featuredProducts = [
-        {
-            name: "Premium Wireless Headphones",
-            category: "Audio",
-            price: 199.99,
-            oldPrice: 249.99,
-            discount: "20% OFF",
-            rating: 4.5,
-            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60",
-        },
-        {
-            name: "Smart Watch Series 5",
-            category: "Wearables",
-            price: 299.99,
-            oldPrice: 349.99,
-            discount: "14% OFF",
-            rating: 4.2,
-            image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60",
-        },
-        {
-            name: "Smartphone Pro Max",
-            category: "Smartphones",
-            price: 999.99,
-            oldPrice: 1099.99,
-            discount: "9% OFF",
-            rating: 4.8,
-            image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60",
-        },
-        {
-            name: "Bluetooth Earbuds Pro",
-            category: "Audio",
-            price: 149.99,
-            oldPrice: 179.99,
-            discount: "17% OFF",
-            rating: 4.4,
-            image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=500&auto=format&fit=crop&q=60",
-        },
-    ];
+    let { data } = $props();
+    let featuredProducts = $derived(data.products);
 </script>
 
 <Navbar />
@@ -161,59 +123,13 @@
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                 {#each featuredProducts as product}
-                    <Card.Root
-                        class="group overflow-hidden border border-border/50 bg-card p-0 gap-0 transition-all hover:border-primary/50"
-                    >
-                        <div
-                            class="relative aspect-square overflow-hidden bg-muted"
-                        >
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-
-                            <div class="absolute top-4 left-4">
-                                <Badge
-                                    class="border-none bg-black/80 text-white backdrop-blur-md px-3 py-1 font-medium"
-                                >
-                                    {product.category}
-                                </Badge>
-                            </div>
-                            <!--
-                            <button
-                                class="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all hover:bg-black/60 hover:scale-110 active:scale-95"
-                            >
-                                <Heart class="h-5.5 w-5.5" />
-                            </button>
-                            -->
-                        </div>
-
-                        <Card.Content class="flex flex-col gap-4 p-5">
-                            <h3
-                                class="text-xl font-bold text-foreground leading-tight min-h-12 line-clamp-2"
-                            >
-                                {product.name}
-                            </h3>
-
-                            <div class="flex items-baseline gap-2">
-                                <span
-                                    class="text-2xl font-medium text-foreground"
-                                    >S/ {product.price}</span
-                                >
-                            </div>
-                        </Card.Content>
-
-                        <Card.Footer class="px-5 pb-4 pt-0">
-                            <Button.Root
-                                class="w-full gap-2 transition-all active:scale-95"
-                                variant="default"
-                            >
-                                <ShoppingCart class="h-5 w-5" />
-                                Ver detalles
-                            </Button.Root>
-                        </Card.Footer>
-                    </Card.Root>
+                    <ProductCard {product} />
+                {:else}
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-muted-foreground text-lg">
+                            No se encontraron productos disponibles.
+                        </p>
+                    </div>
                 {/each}
             </div>
 
