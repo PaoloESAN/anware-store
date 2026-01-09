@@ -2,10 +2,11 @@
     import * as Card from "$lib/components/ui/card/index.js";
     import * as Button from "$lib/components/ui/button/index.js";
     import { Badge } from "$lib/components/ui/badge/index.js";
-    import ShoppingCart from "@lucide/svelte/icons/shopping-cart";
+    import Send from "@lucide/svelte/icons/send";
     import type { Product } from "$lib/types";
 
     let { product }: { product: Product } = $props();
+    let isInWishlist = $state(false);
 
     function getImageUrl() {
         if (product.Imagen && product.Imagen.length > 0) {
@@ -14,61 +15,84 @@
         }
         return "https://images.unsplash.com/photo-1560393464-5c69a73c5770?w=800&auto=format&fit=crop&q=60";
     }
+
+    const whatsappNumber = "5100000";
+    let message = $derived(
+        `Hola, estoy interesado en el producto: ${product.Nombre}. Precio: S/ ${product.Precio.toFixed(2)}`,
+    );
+    let whatsappUrl = $derived(
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+    );
+
+    function toggleWishlist(e: MouseEvent) {
+        e.preventDefault();
+        e.stopPropagation();
+        isInWishlist = !isInWishlist;
+    }
 </script>
 
-<Card.Root
-    class="group overflow-hidden border border-border/50 bg-card p-0 gap-0 transition-all hover:border-primary/50"
->
-    <div class="relative aspect-square overflow-hidden bg-muted">
-        <img
-            src={getImageUrl()}
-            alt={product.Nombre}
-            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-
-        {#if product.Categoria}
-            <div class="absolute top-4 left-4">
-                <Badge
-                    class="border-none bg-black/80 text-white backdrop-blur-md px-3 py-1 font-medium"
-                >
-                    {product.Categoria}
-                </Badge>
-            </div>
-        {/if}
-
-        {#if !product.hayStock}
-            <div
-                class="absolute inset-0 bg-background/60 flex items-center justify-center backdrop-blur-[2px]"
-            >
-                <Badge variant="destructive" class="text-lg py-1 px-4"
-                    >Agotado</Badge
-                >
-            </div>
-        {/if}
-    </div>
-
-    <Card.Content class="flex flex-col gap-4 p-5">
-        <h3
-            class="text-xl font-bold text-foreground leading-tight min-h-12 line-clamp-2"
+<div class="group">
+    <Card.Root
+        class="relative h-full overflow-hidden rounded-xl p-0 transition-all hover:border-primary/50"
+    >
+        <div
+            class="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-900"
         >
-            {product.Nombre}
-        </h3>
+            <img
+                src={getImageUrl()}
+                alt={product.Nombre}
+                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
 
-        <div class="flex items-baseline gap-2">
-            <span class="text-2xl font-medium text-foreground"
-                >S/ {product.Precio.toFixed(2)}</span
-            >
+            {#if product.Categoria}
+                <div class="absolute top-4 left-4">
+                    <Badge
+                        variant="secondary"
+                        class="bg-zinc-900/80 px-3 py-1 text-[11px] font-bold tracking-tight text-white backdrop-blur-md dark:bg-black/80"
+                    >
+                        {product.Categoria}
+                    </Badge>
+                </div>
+            {/if}
+
+            {#if !product.hayStock}
+                <div
+                    class="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-md dark:bg-black/60"
+                >
+                    <Badge
+                        variant="destructive"
+                        class="px-5 py-2 text-sm font-black uppercase tracking-widest shadow-2xl"
+                    >
+                        Out of Stock
+                    </Badge>
+                </div>
+            {/if}
         </div>
-    </Card.Content>
 
-    <Card.Footer class="px-5 pb-4 pt-0">
-        <Button.Root
-            class="w-full gap-2 transition-all active:scale-95"
-            variant={product.hayStock ? "default" : "secondary"}
-            disabled={!product.hayStock}
-        >
-            <ShoppingCart class="h-5 w-5" />
-            {product.hayStock ? "Ver detalles" : "Sin stock"}
-        </Button.Root>
-    </Card.Footer>
-</Card.Root>
+        <Card.Content class="flex flex-col gap-2 px-5">
+            <h3
+                class="text-lg font-bold text-foreground leading-tight min-h-12 line-clamp-2"
+            >
+                {product.Nombre}
+            </h3>
+
+            <div class="flex items-baseline gap-2">
+                <span class="text-xl font-bold text-foreground"
+                    >S/ {product.Precio.toFixed(2)}</span
+                >
+            </div>
+        </Card.Content>
+
+        <Card.Footer class="p-6 pt-0">
+            <Button.Root
+                href={whatsappUrl}
+                target="_blank"
+                disabled={!product.hayStock}
+                class="w-full"
+            >
+                <Send class="h-4 w-4" />
+                Consultar WhatsApp
+            </Button.Root>
+        </Card.Footer>
+    </Card.Root>
+</div>

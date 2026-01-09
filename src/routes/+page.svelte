@@ -5,7 +5,7 @@
     import ArrowRight from "@lucide/svelte/icons/arrow-right";
     import Lock from "@lucide/svelte/icons/lock";
     import Headphones from "@lucide/svelte/icons/headphones";
-    import ProductCard from "$lib/components/catalog/product-card.svelte";
+    import FeaturesCard from "$lib/components/catalog/features-card.svelte";
     import WhyChooseUs from "$lib/components/catalog/why-choose-us.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
 
@@ -125,7 +125,7 @@
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                 {#each featuredProducts as product}
-                    <ProductCard {product} />
+                    <FeaturesCard {product} />
                 {:else}
                     <div class="col-span-full py-20 text-center">
                         <p class="text-muted-foreground text-lg">
@@ -136,7 +136,7 @@
             </div>
 
             <div class="mt-12 text-center">
-                <Button.Root variant="outline" class="group">
+                <Button.Root href="/productos" variant="outline" class="group">
                     Ver todos los productos
                     <ArrowRight
                         class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
