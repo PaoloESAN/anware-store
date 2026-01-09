@@ -25,4 +25,8 @@
 	{perPage}
 	{siblingCount}
 	{...restProps}
-/>
+>
+	{#snippet children({ pages, range })}
+		{@render restProps.children?.({ pages, range, currentPage: page })}
+	{/snippet}
+</PaginationPrimitive.Root>

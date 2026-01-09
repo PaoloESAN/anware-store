@@ -2,19 +2,28 @@ import { STRAPI_API_URL } from '$env/static/private';
 import type { PageServerLoad } from './$types';
 import type { Product, StrapiResponse } from '$lib/types';
 
-export const load: PageServerLoad = async ({ fetch }) => {
-    const url = `${STRAPI_API_URL}/api/productos?populate[features][populate]=*&populate[Imagen][populate]=*&populate[specifications]=*&pagination[page]=1&pagination[pageSize]=8`;
+export const load: PageServerLoad = async ({ fetch, url: requestUrl }) => {
+    const page = requestUrl.searchParams.get('page') || '1';
+    const pageSize = '8';
+
+    const url = `${STRAPI_API_URL}/api/productos?populate[features][populate]=*&populate[Imagen][populate]=*&populate[specifications]=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
     const res = await fetch(url);
 
     if (!res.ok) {
         return {
-            products: []
+            products: [],
+            pagination: {
+                page: 1,
+                pageSize: 8,
+                pageCount: 0,
+                total: 0
+            }
         };
     }
 
     const response: StrapiResponse<Product> = await res.json();
 
-    const rawData = (response as any).data || [];
+    const rawData = response.data || [];
 
     const products: Product[] = rawData.map((product: any) => {
         if (product.Imagen && product.Imagen.length > 0) {
@@ -32,7 +41,9 @@ export const load: PageServerLoad = async ({ fetch }) => {
         }
         return product as Product;
     });
+
     return {
-        products
+        products,
+        pagination: response.meta.pagination
     };
 };

@@ -2,9 +2,28 @@
     import Navbar from "$lib/components/layout/navbar.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
     import ProductCard from "$lib/components/catalog/product-card.svelte";
+    import * as Pagination from "$lib/components/ui/pagination/index.js";
+    import { goto } from "$app/navigation";
 
-    let { data } = $props();
+    let { data }: { data: { products: any[]; pagination: any } } = $props();
     let products = $derived(data.products || []);
+    let pagination = $derived(data.pagination);
+
+    let currentPage = $state(1);
+
+    $effect(() => {
+        if (data.pagination?.page) {
+            currentPage = data.pagination.page;
+        }
+    });
+
+    $effect(() => {
+        if (currentPage !== (data.pagination?.page || 1)) {
+            const url = new URL(window.location.href);
+            url.searchParams.set("page", currentPage.toString());
+            goto(url.toString(), { keepFocus: true, noScroll: false });
+        }
+    });
 </script>
 
 <Navbar />
@@ -42,6 +61,44 @@
                         <ProductCard {product} />
                     {/each}
                 </div>
+
+                {#if pagination && pagination.pageCount > 1}
+                    <div class="mt-12 flex justify-center">
+                        <Pagination.Root
+                            count={pagination.total}
+                            perPage={pagination.pageSize}
+                            bind:page={currentPage}
+                        >
+                            {#snippet children({ pages })}
+                                <Pagination.Content>
+                                    <Pagination.Item>
+                                        <Pagination.Previous />
+                                    </Pagination.Item>
+                                    {#each pages as page (page.key)}
+                                        {#if page.type === "ellipsis"}
+                                            <Pagination.Item>
+                                                <Pagination.Ellipsis />
+                                            </Pagination.Item>
+                                        {:else}
+                                            <Pagination.Item>
+                                                <Pagination.Link
+                                                    {page}
+                                                    isActive={currentPage ===
+                                                        page.value}
+                                                >
+                                                    {page.value}
+                                                </Pagination.Link>
+                                            </Pagination.Item>
+                                        {/if}
+                                    {/each}
+                                    <Pagination.Item>
+                                        <Pagination.Next />
+                                    </Pagination.Item>
+                                </Pagination.Content>
+                            {/snippet}
+                        </Pagination.Root>
+                    </div>
+                {/if}
             {/if}
         </div>
     </section>
