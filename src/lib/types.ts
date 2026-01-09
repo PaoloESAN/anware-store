@@ -21,6 +21,7 @@ export interface Product {
     id: number;
     documentId: string;
     Nombre: string;
+    slug?: string;
     Descripcion: string;
     Categoria: string;
     Precio: number;
