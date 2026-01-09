@@ -9,7 +9,7 @@
 </script>
 
 <header
-    class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur"
+    class="sticky top-0 z-50 w-full border-b border-black/8 bg-white/60 backdrop-blur-md dark:border-white/10 dark:bg-black/60"
 >
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -43,7 +43,11 @@
 
             <div class="flex items-center gap-4">
                 <ThemeToggle />
-                <button class="md:hidden">Menu</button>
+                <button
+                    class="md:hidden text-foreground hover:text-primary transition-colors"
+                >
+                    Menu
+                </button>
             </div>
         </div>
     </div>
