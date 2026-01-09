@@ -36,63 +36,69 @@
         class="relative h-full overflow-hidden rounded-xl p-0 transition-all hover:border-primary/50"
     >
         <div
-            class="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-900"
+            class="flex h-full flex-col transition-all duration-300 {!product.hayStock
+                ? 'blur-md grayscale-[0.5] opacity-60'
+                : ''}"
         >
-            <img
-                src={getImageUrl()}
-                alt={product.Nombre}
-                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
+            <div
+                class="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-900"
+            >
+                <img
+                    src={getImageUrl()}
+                    alt={product.Nombre}
+                    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
 
-            {#if product.Categoria}
-                <div class="absolute top-4 left-4">
-                    <Badge
-                        variant="secondary"
-                        class="bg-zinc-900/80 px-3 py-1 text-[11px] font-bold tracking-tight text-white backdrop-blur-md dark:bg-black/80"
-                    >
-                        {product.Categoria}
-                    </Badge>
-                </div>
-            {/if}
+                {#if product.Categoria}
+                    <div class="absolute top-4 left-4">
+                        <Badge
+                            variant="secondary"
+                            class="bg-zinc-900/80 px-3 py-1 text-[11px] font-bold tracking-tight text-white backdrop-blur-md dark:bg-black/80"
+                        >
+                            {product.Categoria}
+                        </Badge>
+                    </div>
+                {/if}
+            </div>
 
-            {#if !product.hayStock}
-                <div
-                    class="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-md dark:bg-black/60"
+            <Card.Content class="flex flex-col gap-2 p-5">
+                <h3
+                    class="text-lg font-bold text-foreground leading-tight min-h-12 line-clamp-2"
                 >
-                    <Badge
-                        variant="destructive"
-                        class="px-5 py-2 text-sm font-black uppercase tracking-widest shadow-2xl"
+                    {product.Nombre}
+                </h3>
+
+                <div class="flex items-baseline gap-2">
+                    <span class="text-xl font-bold text-foreground"
+                        >S/ {product.Precio.toFixed(2)}</span
                     >
-                        Out of Stock
-                    </Badge>
                 </div>
-            {/if}
+            </Card.Content>
+
+            <Card.Footer class="p-6 pt-0">
+                <Button.Root
+                    href={whatsappUrl}
+                    target="_blank"
+                    disabled={!product.hayStock}
+                    class="w-full"
+                >
+                    <Send class="h-4 w-4" />
+                    Consultar WhatsApp
+                </Button.Root>
+            </Card.Footer>
         </div>
 
-        <Card.Content class="flex flex-col gap-2 px-5">
-            <h3
-                class="text-lg font-bold text-foreground leading-tight min-h-12 line-clamp-2"
+        {#if !product.hayStock}
+            <div
+                class="absolute inset-0 z-20 flex items-center justify-center p-4 bg-black/10"
             >
-                {product.Nombre}
-            </h3>
-
-            <div class="flex items-baseline gap-2">
-                <span class="text-xl font-bold text-foreground"
-                    >S/ {product.Precio.toFixed(2)}</span
+                <Badge
+                    variant="destructive"
+                    class="px-5 py-2 text-sm font-black tracking-widest shadow-2xl"
                 >
+                    Agotado
+                </Badge>
             </div>
-        </Card.Content>
-
-        <Card.Footer class="p-6 pt-0">
-            <Button.Root
-                href={whatsappUrl}
-                target="_blank"
-                disabled={!product.hayStock}
-                class="w-full"
-            >
-                <Send class="h-4 w-4" />
-                Consultar WhatsApp
-            </Button.Root>
-        </Card.Footer>
+        {/if}
     </Card.Root>
 </div>

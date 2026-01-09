@@ -28,17 +28,19 @@
 
 <Navbar />
 
-<main class="min-h-screen bg-black text-foreground">
+<main class="min-h-screen bg-background text-foreground">
     <section class="py-12 md:py-20">
         <div class="container mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
             <div
                 class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
             >
                 <div class="text-left">
-                    <h1 class="text-3xl font-bold tracking-tight text-white">
+                    <h1
+                        class="text-3xl font-bold tracking-tight text-foreground"
+                    >
                         Productos
                     </h1>
-                    <p class="mt-3 font-medium text-zinc-400">
+                    <p class="mt-3 font-medium text-muted-foreground">
                         Navega por nuestros últimos productos y encuentra algo
                         que te encantará.
                     </p>
