@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
     import ThemeToggle from "$lib/components/common/themeToggle.svelte";
 
     const links = [
         { name: "Home", href: "/" },
-        { name: "Products", href: "/products" },
+        { name: "Productos", href: "/productos" },
     ];
 </script>
 
@@ -28,9 +28,9 @@
                                 <a
                                     href={link.href}
                                     class="text-sm font-medium transition-colors hover:text-primary"
-                                    class:text-primary={$page.url.pathname ===
+                                    class:text-primary={page.url.pathname ===
                                         link.href}
-                                    class:text-muted-foreground={$page.url
+                                    class:text-muted-foreground={page.url
                                         .pathname !== link.href}
                                 >
                                     {link.name}
