@@ -18,7 +18,9 @@
     const whatsappNumber = "510000000";
 
     let message = $derived(
-        `Hola, quiero consultar por este producto destacado: ${product.Nombre}. Precio: S/ ${product.Precio}`,
+        product.hayStock
+            ? `Hola, quiero consultar por este producto destacado: ${product.Nombre}. Precio: S/ ${product.Precio.toFixed(2)}`
+            : `Hola, me gustaría consultar la disponibilidad del producto destacado: ${product.Nombre}. Actualmente figura como agotado.`,
     );
     let whatsappUrl = $derived(
         `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
@@ -75,11 +77,12 @@
             href={whatsappUrl}
             target="_blank"
             class="w-full gap-2 transition-all active:scale-95"
-            variant={product.hayStock ? "default" : "secondary"}
-            disabled={!product.hayStock}
+            variant="default"
         >
             <Send class="h-4 w-4" />
-            {product.hayStock ? "Consultar WhatsApp" : "Sin stock"}
+            {product.hayStock
+                ? "Consultar WhatsApp"
+                : "Consultar Disponibilidad"}
         </Button.Root>
     </Card.Footer>
 </Card.Root>

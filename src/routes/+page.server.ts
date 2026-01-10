@@ -3,7 +3,15 @@ import type { PageServerLoad } from './$types';
 import type { Product, StrapiResponse } from '$lib/types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-  const url = `${STRAPI_API_URL}/api/productos?populate[features][populate]=*&populate[Imagen][populate]=*&populate[specifications]=*&pagination[start]=0&pagination[limit]=4`;
+  const query = new URLSearchParams({
+    'filters[Destacado][$eq]': 'true',
+    'populate[features][populate]': '*',
+    'populate[Imagen][populate]': '*',
+    'populate[specifications]': '*',
+    'pagination[limit]': '4'
+  });
+
+  const url = `${STRAPI_API_URL}/api/productos?${query.toString()}`;
   const res = await fetch(url);
 
   if (!res.ok) {
