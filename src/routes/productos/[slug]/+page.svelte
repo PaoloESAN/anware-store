@@ -87,7 +87,7 @@
                         ? 'text-green-600'
                         : 'text-red-600'}"
                 >
-                    {product.hayStock ? "In Stock" : "Agotado"}
+                    {product.hayStock ? "En Stock" : "Agotado"}
                 </p>
 
                 <Button.Root

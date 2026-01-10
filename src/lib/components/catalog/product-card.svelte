@@ -27,7 +27,7 @@
         `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
     );
 
-    const productSlug = $derived(slugify(product.Nombre));
+    const productSlug = $derived(product.slug || slugify(product.Nombre));
 </script>
 
 <div class="group h-full">
@@ -40,6 +40,7 @@
                 : ''}"
         >
             <a href="/productos/{productSlug}" class="flex flex-col">
+                <span class="absolute inset-0 z-10" aria-hidden="true"></span>
                 <div
                     class="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-900"
                 >
@@ -76,7 +77,7 @@
                 </Card.Content>
             </a>
 
-            <div class="mt-auto p-6 pt-0">
+            <div class="mt-auto p-6 pt-0 relative z-30">
                 <Button.Root href={whatsappUrl} target="_blank" class="w-full">
                     <Send class="h-4 w-4" />
                     {product.hayStock
