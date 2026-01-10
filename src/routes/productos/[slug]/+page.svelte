@@ -32,12 +32,12 @@
 
 <Navbar />
 
-<main class="min-h-screen bg-[#0f0f0f] text-zinc-100 pt-20 pb-12">
+<main class="min-h-screen bg-background text-foreground pt-20 pb-12">
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
             <a
                 href="/productos"
-                class="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+                class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
                 <ChevronLeft class="h-4 w-4" />
                 Volver a Productos
@@ -46,7 +46,7 @@
 
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div
-                class="relative aspect-square overflow-hidden rounded-2xl bg-[#0f0f0f]"
+                class="relative aspect-square overflow-hidden rounded-2xl bg-muted"
             >
                 <img
                     src={getImageUrl()}
@@ -58,7 +58,7 @@
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-2">
                     <h1
-                        class="text-4xl font-bold tracking-tight text-white lg:text-5xl"
+                        class="text-4xl font-bold tracking-tight text-foreground lg:text-5xl"
                     >
                         {product.Nombre}
                     </h1>
@@ -66,17 +66,17 @@
 
                 <div class="flex flex-col items-baseline gap-3">
                     {#if product.Categoria}
-                        <p class="text-lg font-medium text-zinc-400">
+                        <p class="text-lg font-medium text-muted-foreground">
                             {product.Categoria}
                         </p>
                     {/if}
-                    <span class="text-4xl font-bold text-white">
+                    <span class="text-4xl font-semibold text-foreground">
                         S/ {product.Precio.toFixed(2)}
                     </span>
                 </div>
 
                 <div class="max-w-prose">
-                    <p class="text-lg leading-relaxed text-zinc-400">
+                    <p class="text-lg leading-relaxed text-muted-foreground">
                         {product.Descripcion ||
                             "Sin descripción disponible para este producto."}
                     </p>
@@ -93,7 +93,7 @@
                 <Button.Root
                     href={whatsappUrl}
                     target="_blank"
-                    class="w-full bg-white text-black hover:bg-zinc-200 text-sm font-semibold md:px-12"
+                    class="w-full text-sm font-semibold md:px-12"
                 >
                     <Send class="h-5 w-5 mr-2" />
                     {product.hayStock
@@ -104,7 +104,7 @@
         </div>
 
         <div
-            class="mt-20 grid grid-cols-1 gap-16 border-t border-zinc-800 pt-16 lg:grid-cols-2"
+            class="mt-20 grid grid-cols-1 gap-16 border-t pt-16 lg:grid-cols-2"
         >
             <div>
                 <h2 class="mb-8 text-2xl font-bold text-white">Features</h2>
