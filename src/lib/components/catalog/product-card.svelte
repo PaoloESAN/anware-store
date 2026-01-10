@@ -28,12 +28,6 @@
     );
 
     const productSlug = $derived(slugify(product.Nombre));
-
-    function toggleWishlist(e: MouseEvent) {
-        e.preventDefault();
-        e.stopPropagation();
-        isInWishlist = !isInWishlist;
-    }
 </script>
 
 <div class="group h-full">
@@ -75,7 +69,7 @@
                     </h3>
 
                     <div class="flex items-baseline gap-2">
-                        <span class="text-xl font-bold text-foreground"
+                        <span class="text-xl font-semibold text-foreground"
                             >S/ {product.Precio.toFixed(2)}</span
                         >
                     </div>

@@ -66,7 +66,7 @@
         </h3>
 
         <div class="flex items-baseline gap-2">
-            <span class="text-xl font-bold text-foreground"
+            <span class="text-xl font-semibold text-foreground"
                 >S/ {product.Precio.toFixed(2)}</span
             >
         </div>
