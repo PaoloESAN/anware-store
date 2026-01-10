@@ -8,9 +8,9 @@
     import FeaturesCard from "$lib/components/catalog/features-card.svelte";
     import WhyChooseUs from "$lib/components/catalog/why-choose-us.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
+    import { Skeleton } from "$lib/components/ui/skeleton/index.js";
 
     let { data } = $props();
-    let featuredProducts = $derived(data.products);
 </script>
 
 <Navbar />
@@ -124,15 +124,34 @@
             </div>
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {#each featuredProducts as product}
-                    <FeaturesCard {product} />
-                {:else}
-                    <div class="col-span-full py-20 text-center">
-                        <p class="text-muted-foreground text-lg">
-                            No se encontraron productos disponibles.
-                        </p>
-                    </div>
-                {/each}
+                {#await data.featuredProductsData}
+                    {#each Array(4) as _}
+                        <div
+                            class="flex flex-col gap-4 rounded-xl border p-0 overflow-hidden shadow-sm"
+                        >
+                            <Skeleton
+                                class="aspect-square w-full rounded-none"
+                            />
+                            <div class="flex flex-col gap-3 p-5">
+                                <Skeleton class="h-6 w-3/4" />
+                                <Skeleton class="h-6 w-1/4 mt-1" />
+                            </div>
+                            <div class="p-6 pt-0">
+                                <Skeleton class="h-10 w-full" />
+                            </div>
+                        </div>
+                    {/each}
+                {:then { products: featuredProducts }}
+                    {#each featuredProducts as product}
+                        <FeaturesCard {product} />
+                    {:else}
+                        <div class="col-span-full py-20 text-center">
+                            <p class="text-muted-foreground text-lg">
+                                No se encontraron productos disponibles.
+                            </p>
+                        </div>
+                    {/each}
+                {/await}
             </div>
 
             <div class="mt-12 text-center">

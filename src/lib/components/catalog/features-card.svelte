@@ -31,7 +31,7 @@
 </script>
 
 <Card.Root
-    class="group overflow-hidden border border-border/50 bg-card p-0 gap-0 transition-all hover:border-primary/50"
+    class="group relative overflow-hidden border border-border/50 bg-card p-0 gap-0 transition-all hover:border-primary/50"
 >
     <a href="/productos/{productSlug}" class="block">
         <span class="absolute inset-0 z-10" aria-hidden="true"></span>
