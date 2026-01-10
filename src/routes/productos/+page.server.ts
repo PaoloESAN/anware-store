@@ -6,7 +6,16 @@ export const load: PageServerLoad = async ({ fetch, url: requestUrl }) => {
     const page = requestUrl.searchParams.get('page') || '1';
     const pageSize = '8';
 
-    const url = `${STRAPI_API_URL}/api/productos?populate[features][populate]=*&populate[Imagen][populate]=*&populate[specifications]=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+    const params = new URLSearchParams({
+        'populate[features][populate]': '*',
+        'populate[Imagen][populate]': '*',
+        'populate[specifications]': '*',
+        'pagination[page]': page,
+        'pagination[pageSize]': pageSize,
+        'sort[0]': 'id:desc'
+    });
+
+    const url = `${STRAPI_API_URL}/api/productos?${params.toString()}`;
     const res = await fetch(url);
 
     if (!res.ok) {

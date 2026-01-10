@@ -60,7 +60,6 @@
                         >Agotado</Badge
                     >
                 </div>
-                <!-- Optional: Overlay on hover could be added here if desired -->
             {/if}
         </div>
 
