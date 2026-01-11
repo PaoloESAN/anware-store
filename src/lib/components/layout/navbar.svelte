@@ -1,15 +1,26 @@
 <script lang="ts">
     import { page } from "$app/state";
     import ThemeToggle from "$lib/components/common/themeToggle.svelte";
+    import * as Separator from "$lib/components/ui/separator/index.js";
+    import MenuIcon from "@lucide/svelte/icons/menu";
+    import X from "@lucide/svelte/icons/x";
+    import { slide } from "svelte/transition";
+
+    let isOpen = $state(false);
 
     const links = [
         { name: "Home", href: "/" },
         { name: "Productos", href: "/productos" },
     ];
+
+    $effect(() => {
+        const path = page.url.pathname;
+        isOpen = false;
+    });
 </script>
 
 <header
-    class="sticky top-0 z-50 w-full border-b border-black/8 bg-white/60 backdrop-blur-md dark:border-white/10 dark:bg-black/60"
+    class="sticky top-0 z-50 w-full border-b backdrop-blur bg-background/60"
 >
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -41,16 +52,47 @@
                 </nav>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
                 <ThemeToggle />
                 <button
-                    class="md:hidden text-foreground hover:text-primary transition-colors"
+                    onclick={() => (isOpen = !isOpen)}
+                    class="md:hidden flex items-center justify-center rounded-md p-2 text-foreground hover:bg-muted transition-colors"
+                    aria-expanded={isOpen}
                 >
-                    Menu
+                    {#if isOpen}
+                        <X class="h-6 w-6" />
+                    {:else}
+                        <MenuIcon class="h-6 w-6" />
+                    {/if}
+                    <span class="sr-only">Menu</span>
                 </button>
             </div>
         </div>
     </div>
+
+    {#if isOpen}
+        <div
+            transition:slide={{ duration: 300 }}
+            class="md:hidden overflow-hidden"
+        >
+            <div class="container mx-auto px-4 py-4 flex flex-col">
+                <nav class="flex flex-col gap-1">
+                    {#each links as link (link.href)}
+                        <a
+                            href={link.href}
+                            class="flex items-center px-4 py-2 rounded-lg font-semibold transition-all hover:bg-muted {page
+                                .url.pathname === link.href
+                                ? 'bg-primary/10!'
+                                : ''}"
+                        >
+                            {link.name}
+                        </a>
+                    {/each}
+                </nav>
+            </div>
+        </div>
+    {/if}
+    <Separator.Root />
 </header>
 
 <style>
