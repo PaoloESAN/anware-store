@@ -1,38 +1,25 @@
-# sv
+![Anware Store Screenshot](screenshots/image.jpeg)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+# Anware Store
 
-## Creating a project
+Un e-commerce moderno y minimalista diseñado para mostrar productos de forma elegante y facilitar el contacto directo a través de WhatsApp.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Este proyecto está inspirado en la plantilla [Relivator](https://github.com/reliverse/relivator) de React y Next.js, adaptada completamente a **Svelte 5**.
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Características
 
-# create a new project in my-app
-npx sv create my-app
-```
+- **Catálogo de Productos**: Vista general de productos de forma atractiva.
+- **Detalle de Producto**: Información detallada y precios de cada artículo.
+- **Contacto Directo vía WhatsApp**: Botón integrado que genera un mensaje automático con el nombre del producto para agilizar las consultas y pedidos.
+- **Gestión de Contenido**: Integración con **Strapi** para una administración sencilla de productos y stock.
+- **Diseño Responsive**: Optimizado para cualquier dispositivo.
 
-## Developing
+## Tecnologías
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- **[SvelteKit](https://kit.svelte.dev/)**: Framework principal con Svelte 5.
+- **[Strapi](https://strapi.io/)**: Headless CMS para la gestión de datos.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Estilizado moderno y eficiente.
+- **[shadcn-svelte](https://www.shadcn-svelte.com/)**: Componentes de interfaz premium y accesibles.
+- **[Lucide Svelte](https://lucide.dev/)**: Set de iconos consistentes.
+---
+Diseñado para ofrecer una experiencia de compra directa y sin complicaciones.
