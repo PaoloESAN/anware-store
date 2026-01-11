@@ -9,8 +9,14 @@
     import WhyChooseUs from "$lib/components/catalog/why-choose-us.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
     import { Skeleton } from "$lib/components/ui/skeleton/index.js";
+    import { useWhatsApp } from "$lib/hooks/use-whatsapp";
 
     let { data } = $props();
+
+    const { getWhatsAppUrl } = useWhatsApp();
+    const generalContactUrl = getWhatsAppUrl(
+        "Hola, me gustaría saber más sobre ustedes.",
+    );
 </script>
 
 <Navbar />
@@ -61,6 +67,7 @@
 
                     <div class="flex flex-col gap-3 sm:flex-row">
                         <Button.Root
+                            href="/productos"
                             class="group transition-all hover:scale-105 active:scale-95"
                         >
                             Ver Catalogo
@@ -68,7 +75,11 @@
                                 class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                             />
                         </Button.Root>
-                        <Button.Root variant="outline">WhatsApp</Button.Root>
+                        <Button.Root
+                            href={generalContactUrl}
+                            target="_blank"
+                            variant="outline">Contáctanos</Button.Root
+                        >
                     </div>
 
                     <div

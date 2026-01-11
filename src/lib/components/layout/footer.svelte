@@ -72,21 +72,21 @@
                     </li>
                     <li>
                         <a
-                            href="/products"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Productos</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/catalog"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Catálogo</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/offers"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Ofertas</a
                         >
@@ -101,28 +101,28 @@
                 >
                     <li>
                         <a
-                            href="/about"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Sobre Nosotros</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/contact"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Contacto</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/blog"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Blog</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/careers"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Carreras</a
                         >
@@ -137,28 +137,28 @@
                 >
                     <li>
                         <a
-                            href="/help"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Centro de Ayuda</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/shipping"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Envíos</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/terms"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Términos de Servicio</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/privacy"
+                            href="/"
                             class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                             >Privacidad</a
                         >
@@ -177,22 +177,22 @@
                 class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-zinc-500 dark:text-zinc-400 text-sm font-light"
             >
                 <a
-                    href="/privacy"
+                    href="/"
                     class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                     >Privacidad</a
                 >
                 <a
-                    href="/terms"
+                    href="/"
                     class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                     >Términos</a
                 >
                 <a
-                    href="/cookies"
+                    href="/"
                     class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                     >Cookies</a
                 >
                 <a
-                    href="/sitemap"
+                    href="/"
                     class="hover:text-zinc-950 dark:hover:text-white transition-colors"
                     >Sitemap</a
                 >

@@ -5,9 +5,10 @@
     import Send from "@lucide/svelte/icons/send";
     import type { Product } from "$lib/types";
     import { slugify } from "$lib/utils";
+    import { useWhatsApp } from "$lib/hooks/use-whatsapp";
 
     let { product }: { product: Product } = $props();
-    let isInWishlist = $state(false);
+    const { getWhatsAppUrl } = useWhatsApp();
 
     function getImageUrl() {
         if (product.Imagen && product.Imagen.length > 0) {
@@ -17,15 +18,12 @@
         return "https://images.unsplash.com/photo-1560393464-5c69a73c5770?w=800&auto=format&fit=crop&q=60";
     }
 
-    const whatsappNumber = "5100000";
     let message = $derived(
         product.hayStock
             ? `Hola, estoy interesado en el producto: ${product.Nombre}. Precio: S/ ${product.Precio.toFixed(2)}`
             : `Hola, me gustaría consultar la disponibilidad del producto: ${product.Nombre}. Actualmente figura como agotado.`,
     );
-    let whatsappUrl = $derived(
-        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-    );
+    let whatsappUrl = $derived(getWhatsAppUrl(message));
 
     const productSlug = $derived(product.slug || slugify(product.Nombre));
 </script>

@@ -2,17 +2,14 @@
     import Navbar from "$lib/components/layout/navbar.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
     import * as Button from "$lib/components/ui/button/index.js";
-    import { Badge } from "$lib/components/ui/badge/index.js";
-    import * as Separator from "$lib/components/ui/separator/index.js";
     import ChevronLeft from "@lucide/svelte/icons/chevron-left";
     import Send from "@lucide/svelte/icons/send";
     import type { Product } from "$lib/types";
     import { Skeleton } from "$lib/components/ui/skeleton/index.js";
-    import { slugify } from "$lib/utils";
+    import { useWhatsApp } from "$lib/hooks/use-whatsapp";
 
     let { data }: { data: { productData: Promise<Product> } } = $props();
-
-    const whatsappNumber = "5100000";
+    const { getWhatsAppUrl } = useWhatsApp();
 
     function getImageUrl(product: Product) {
         if (product.Imagen && product.Imagen.length > 0) {
@@ -58,7 +55,7 @@
             {@const message = product.hayStock
                 ? `Hola, estoy interesado en el producto: ${product.Nombre}. Precio: S/ ${product.Precio.toFixed(2)}`
                 : `Hola, me gustaría consultar la disponibilidad del producto: ${product.Nombre}. Actualmente figura como agotado.`}
-            {@const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`}
+            {@const whatsappUrl = getWhatsAppUrl(message)}
 
             <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
                 <div
