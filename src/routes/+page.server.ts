@@ -9,7 +9,7 @@ export const load: PageServerLoad = ({ fetch }) => {
       'populate[features][populate]': '*',
       'populate[Imagen][populate]': '*',
       'populate[specifications]': '*',
-      'pagination[limit]': '4'
+      'pagination[limit]': '8'
     });
 
     const url = `${STRAPI_API_URL}/api/productos?${query.toString()}`;

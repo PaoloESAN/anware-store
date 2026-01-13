@@ -1,6 +1,7 @@
 <script lang="ts">
     import Navbar from "$lib/components/layout/navbar.svelte";
     import * as Button from "$lib/components/ui/button/index.js";
+    import * as Carousel from "$lib/components/ui/carousel/index.js";
     import { Badge } from "$lib/components/ui/badge/index.js";
     import ArrowRight from "@lucide/svelte/icons/arrow-right";
     import Lock from "@lucide/svelte/icons/lock";
@@ -134,36 +135,62 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {#await data.featuredProductsData}
-                    {#each Array(4) as _}
-                        <div
-                            class="flex flex-col gap-4 rounded-xl border p-0 overflow-hidden shadow-sm"
-                        >
-                            <Skeleton
-                                class="aspect-square w-full rounded-none"
-                            />
-                            <div class="flex flex-col gap-3 p-5">
-                                <Skeleton class="h-6 w-3/4" />
-                                <Skeleton class="h-6 w-1/4 mt-1" />
-                            </div>
-                            <div class="p-6 pt-0">
-                                <Skeleton class="h-10 w-full" />
-                            </div>
+            {#await data.featuredProductsData}
+                <Carousel.Root
+                    opts={{ align: "start", slidesToScroll: 1 }}
+                    class="mx-auto w-full"
+                >
+                    <Carousel.Content class="-ml-4 md:-ml-8">
+                        {#each Array(4) as _}
+                            <Carousel.Item
+                                class="pl-4 md:pl-8 sm:basis-1/2 lg:basis-1/4"
+                            >
+                                <div
+                                    class="flex flex-col gap-4 rounded-xl border p-0 overflow-hidden shadow-sm"
+                                >
+                                    <Skeleton
+                                        class="aspect-square w-full rounded-none"
+                                    />
+                                    <div class="flex flex-col gap-3 p-5">
+                                        <Skeleton class="h-6 w-3/4" />
+                                        <Skeleton class="h-6 w-1/4 mt-1" />
+                                    </div>
+                                    <div class="p-6 pt-0">
+                                        <Skeleton class="h-10 w-full" />
+                                    </div>
+                                </div>
+                            </Carousel.Item>
+                        {/each}
+                    </Carousel.Content>
+                </Carousel.Root>
+            {:then { products: featuredProducts }}
+                {#if featuredProducts.length > 0}
+                    <Carousel.Root
+                        opts={{ align: "start", slidesToScroll: 1 }}
+                        class="mx-auto w-full"
+                    >
+                        <Carousel.Content class="-ml-4 md:-ml-8">
+                            {#each featuredProducts as product}
+                                <Carousel.Item
+                                    class="pl-4 md:pl-8 sm:basis-1/2 lg:basis-1/4"
+                                >
+                                    <FeaturesCard {product} />
+                                </Carousel.Item>
+                            {/each}
+                        </Carousel.Content>
+                        <div class="hidden md:block">
+                            <Carousel.Previous class="-left-12" />
+                            <Carousel.Next class="-right-12" />
                         </div>
-                    {/each}
-                {:then { products: featuredProducts }}
-                    {#each featuredProducts as product}
-                        <FeaturesCard {product} />
-                    {:else}
-                        <div class="col-span-full py-20 text-center">
-                            <p class="text-muted-foreground text-lg">
-                                No se encontraron productos disponibles.
-                            </p>
-                        </div>
-                    {/each}
-                {/await}
-            </div>
+                    </Carousel.Root>
+                {:else}
+                    <div class="py-20 text-center w-full">
+                        <p class="text-muted-foreground text-lg">
+                            No se encontraron productos disponibles.
+                        </p>
+                    </div>
+                {/if}
+            {/await}
 
             <div class="mt-12 text-center">
                 <Button.Root href="/productos" variant="outline" class="group">
