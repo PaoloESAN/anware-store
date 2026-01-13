@@ -2,6 +2,7 @@
     import Navbar from "$lib/components/layout/navbar.svelte";
     import Footer from "$lib/components/layout/footer.svelte";
     import * as Button from "$lib/components/ui/button/index.js";
+    import * as Carousel from "$lib/components/ui/carousel/index.js";
     import ChevronLeft from "@lucide/svelte/icons/chevron-left";
     import Send from "@lucide/svelte/icons/send";
     import type { Product } from "$lib/types";
@@ -61,11 +62,39 @@
                 <div
                     class="relative aspect-square overflow-hidden rounded-2xl bg-muted"
                 >
-                    <img
-                        src={getImageUrl(product)}
-                        alt={product.Nombre}
-                        class="h-full w-full object-cover"
-                    />
+                    {#if product.Imagen && product.Imagen.length > 1}
+                        <Carousel.Root class="w-full">
+                            <Carousel.Content class="ml-0">
+                                {#each product.Imagen as img}
+                                    <Carousel.Item class="pl-0">
+                                        <div class="aspect-square">
+                                            <img
+                                                src={img.large ||
+                                                    img.medium ||
+                                                    img.url}
+                                                alt={product.Nombre}
+                                                class="h-full w-full object-cover"
+                                            />
+                                        </div>
+                                    </Carousel.Item>
+                                {/each}
+                            </Carousel.Content>
+                            <Carousel.Previous
+                                class="start-4 z-10"
+                                variant="secondary"
+                            />
+                            <Carousel.Next
+                                class="end-4 z-10"
+                                variant="secondary"
+                            />
+                        </Carousel.Root>
+                    {:else}
+                        <img
+                            src={getImageUrl(product)}
+                            alt={product.Nombre}
+                            class="h-full w-full object-cover"
+                        />
+                    {/if}
                 </div>
 
                 <div class="flex flex-col gap-6">

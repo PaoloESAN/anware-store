@@ -21,6 +21,7 @@
 		"@tailwindcss/vite": "^4.1.17",
 		"bits-ui": "^2.15.4",
 		"clsx": "^2.1.1",
+		"embla-carousel-svelte": "^8.6.0",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",
 		"tailwind-merge": "^3.4.0",
